@@ -6,3 +6,6 @@ python-decouple
 dj_rest_auth
 drf-yasg
 django-filter
+djangorestframework-jwt
+uuid
+djangorestframework-simplejwt==5.2.2
