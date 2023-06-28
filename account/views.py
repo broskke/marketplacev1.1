@@ -51,24 +51,3 @@ class RefreshView(TokenRefreshView):
     permission_classes = (AllowAny, )
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
