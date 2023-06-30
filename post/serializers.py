@@ -36,14 +36,15 @@ class PostListSerializer(serializers.ModelSerializer):
         model = Post
         fields = ('id', 'title', 'owner', 'owner_username', 'category', 'category_username', 'preview')
 
-    def to_representation(self, instance):
-        repr = super(PostListSerializer, self).to_representation(instance)
-        repr['likes_count'] = instance.likes.count()
-        user = self.context['request'].user
-        if user.is_authenticated:
-            repr['is_liked'] = user.likes.filter(post=instance).exists()
-            repr['is_favorite'] = user.favorites.filter(post=instance).exists()
-        return repr
+    # def to_representation(self, instance):
+    #     repr = super(PostListSerializer, self).to_representation(instance)
+    #     repr['likes_count'] = instance.likes.count()
+    #     user = self.context['request'].user
+    #     if user.is_authenticated:
+    #         repr['is_liked'] = user.likes.filter(post=instance).exists()
+    #         repr['is_favorite'] = user.favorites.filter(post=instance).exists()
+    #     return repr
+    #
 
 
 class PostDetailSerializer(serializers.ModelSerializer):
