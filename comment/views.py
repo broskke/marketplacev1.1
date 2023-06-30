@@ -1,12 +1,12 @@
-from rest_framework import viewsets, generics
+from rest_framework import generics, permissions
+from post.permishions import IsAuthorOrAdminOrPostOwner
 from .models import Comment
-from .serializers import CommentSerializer
-from products import permissions
+from . import serializers
 
 
-class CommentViewSet(viewsets.ModelViewSet):
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
+class CommentCreateView(generics.CreateAPIView):
+    serializer_class = serializers.CommentSerializer
+    permission_classes = (permissions.IsAuthenticated, )
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -17,6 +17,7 @@ class CommentDetailView(generics.RetrieveDestroyAPIView):
     serializer_class = serializers.CommentSerializer
 
     def get_permissions(self):
-        if self.request.method == 'DELETE':
-            return [IsAuthorOrAdminOrCommentOwner(), ]
+        if self.request.method == 'GET':
+            return [IsAuthorOrAdminOrPostOwner(), ]
         return [permissions.AllowAny(), ]
+
