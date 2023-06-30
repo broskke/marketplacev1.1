@@ -38,6 +38,8 @@ INSTALLED_APPS = [
 
     'account',
     'category',
+    'post',
+    'comment',
     'rating',
     'media',
     'order',
