@@ -20,4 +20,3 @@ class CommentDetailView(generics.RetrieveDestroyAPIView):
         if self.request.method == 'GET':
             return [IsAuthorOrAdminOrPostOwner(), ]
         return [permissions.AllowAny(), ]
-

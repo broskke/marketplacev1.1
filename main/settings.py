@@ -35,7 +35,6 @@ INSTALLED_APPS = [
 
     # 'ckeditor',
     # my_apps
-
     'account',
     'category',
     'post',
@@ -186,4 +185,11 @@ SIMPLE_JWT = {
     "TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSerializer",
     "TOKEN_VERIFY_SERIALIZER": "rest_framework_simplejwt.serializers.TokenVerifySerializer",
     "TOKEN_BLACKLIST_SERIALIZER": "rest_framework_simplejwt.serializers.TokenBlacklistSerializer",
+}
+# Кэширование данных
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
+    }
 }
