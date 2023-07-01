@@ -41,3 +41,16 @@ class PostImage(models.Model):
     def save(self, *args, **kwargs):
         self.title = self.generate_name()
         return super(PostImage, self).save(*args, **kwargs)
+
+
+class PostRating(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name="Пользователь", on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, verbose_name="Пост", on_delete=models.CASCADE, related_name='rating')
+    value = models.PositiveIntegerField("Рейтинг")
+
+    def __str__(self):
+        return f"{self.user} - {self.post} - {self.value}"
+
+    class Meta:
+        verbose_name = "Рейтинг"
+        verbose_name_plural = "Рейтинги"

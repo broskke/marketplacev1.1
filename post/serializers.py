@@ -1,6 +1,7 @@
+from django.db import models
 from rest_framework import serializers
 from category.models import Category
-from .models import Post, PostImage
+from .models import Post, PostImage, PostRating
 
 
 class PostImageSerializer(serializers.ModelSerializer):
@@ -31,40 +32,33 @@ class PostCreateSerializer(serializers.ModelSerializer):
 class PostListSerializer(serializers.ModelSerializer):
     owner_username = serializers.ReadOnlyField(source='owner.username')
     category_username = serializers.ReadOnlyField(source='category.name')
+    rating = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
-        fields = ('id', 'title', 'owner', 'owner_username', 'category', 'category_username', 'preview')
+        fields = ('id', 'title', 'owner', 'owner_username', 'category', 'category_username', 'preview', 'rating')
 
-    # def to_representation(self, instance):
-    #     repr = super(PostListSerializer, self).to_representation(instance)
-    #     repr['likes_count'] = instance.likes.count()
-    #     user = self.context['request'].user
-    #     if user.is_authenticated:
-    #         repr['is_liked'] = user.likes.filter(post=instance).exists()
-    #         repr['is_favorite'] = user.favorites.filter(post=instance).exists()
-    #     return repr
-    #
+    @staticmethod
+    def get_rating(obj):
+        return obj.rating.aggregate(models.Avg('value'))['value__avg']
 
 
 class PostDetailSerializer(serializers.ModelSerializer):
     owner_username = serializers.ReadOnlyField(source='owner.username')
     category_username = serializers.ReadOnlyField(source='category.name')
     images = PostImageSerializer(many=True)
-
-    # comments = CommentSerializer(many=True) # 1 способ - related_name
+    rating = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
         fields = '__all__'
-    #
-    # def to_representation(self, instance):
-    #     repr = super().to_representation(instance)
-    #     repr['comments_count'] = instance.comments.count()
-    #     repr['comments'] = CommentSerializer(instance.comments.all(), many=True).data  # 2 sposob
-    #     repr['likes_count'] = instance.likes.count()
-    #     user = self.context['request'].user
-    #     if user.is_authenticated:
-    #         repr['is_liked'] = user.likes.filter(post=instance).exists()
-    #         repr['is_favorite'] = user.favorites.filter(post=instance).exists()
-    #     return repr
+
+    @staticmethod
+    def get_rating(obj):
+        return obj.rating.aggregate(models.Avg('value'))['value__avg']
+
+
+class RatingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PostRating
+        fields = '__all__'

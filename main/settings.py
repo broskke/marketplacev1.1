@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'category',
     'post',
     'comment',
-    'rating',
     'media',
     'order',
 ]
