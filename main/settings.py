@@ -32,7 +32,6 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'django_filters',
     'drf_yasg',
-    'star_ratings',
 
     # 'ckeditor',
     # my_apps
@@ -41,7 +40,6 @@ INSTALLED_APPS = [
     'category',
     'post',
     'comment',
-    'rating',
     'media',
     'order',
 ]

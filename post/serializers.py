@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from category.models import Category
+from comment.serializers import CommentSerializer
 from .models import Post, PostImage
 
 
@@ -50,8 +51,7 @@ class PostDetailSerializer(serializers.ModelSerializer):
     owner_username = serializers.ReadOnlyField(source='owner.username')
     category_username = serializers.ReadOnlyField(source='category.name')
     images = PostImageSerializer(many=True)
-
-    # comments = CommentSerializer(many=True) # 1 способ - related_name
+    comments = CommentSerializer(many=True)
 
     class Meta:
         model = Post

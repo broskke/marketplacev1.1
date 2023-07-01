@@ -14,7 +14,7 @@ class Post(models.Model):
     update_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ('title', 'body', 'category', 'preview')
+        ordering = ('title', 'body', 'category', 'preview', 'comments')
 
     def __str__(self):
         return f"{self.title}: {self.preview}"
