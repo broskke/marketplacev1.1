@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'post',
     'comment',
     'media',
-    'order',
+    'orders',
 ]
 
 MIDDLEWARE = [
