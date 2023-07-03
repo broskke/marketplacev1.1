@@ -2,20 +2,19 @@ from random import randint
 from django.db import models
 from django.conf import settings
 from category.models import Category
-# from orders.models import OrderItem
 
 
 class Post(models.Model):
     title = models.CharField(max_length=225)
     body = models.TextField(blank=True)
     price = models.PositiveIntegerField(default=0)
-    # owner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='posts', on_delete=models.CASCADE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='posts', on_delete=models.CASCADE, null=True)
     quantity = models.IntegerField(null=True, default=0)
     category = models.ForeignKey(Category, related_name='posts', on_delete=models.SET_NULL, null=True)
     preview = models.ImageField(upload_to='images/', null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
-    # order_items = models.ManyToManyField(OrderItem, related_name='products')
+    # order_items = models.ManyToManyField('orders.OrderItem', related_name='posts')
 
     class Meta:
         ordering = ('title', 'body', 'category', 'preview', 'comments', 'quantity')

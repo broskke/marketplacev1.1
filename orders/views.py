@@ -5,6 +5,8 @@ from post.models import Post
 
 
 class OrderListCreateView(generics.ListCreateAPIView):
+    serializer_class = OrderSerializer
+
     def perform_create(self, serializer):
         order_items_data = self.request.data.get('order_items', [])
         order = serializer.save(user=self.request.user)
