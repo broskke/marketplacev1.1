@@ -9,3 +9,5 @@ django-filter
 djangorestframework-jwt
 uuid
 djangorestframework-simplejwt==5.2.2
+django-star-ratings
+celery
