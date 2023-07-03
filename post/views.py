@@ -5,7 +5,6 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter
-
 from .models import Post, Favorite, PostRating
 from . import serializers
 from .permishions import IsAuthorOrAdminOrPostOwner

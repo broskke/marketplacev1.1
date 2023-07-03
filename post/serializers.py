@@ -2,6 +2,8 @@ from django.db import models
 from rest_framework import serializers
 from category.models import Category
 from .models import Post, PostImage, PostRating
+from comment.serializers import CommentSerializer
+from .models import Post, PostImage
 
 
 class PostImageSerializer(serializers.ModelSerializer):
@@ -48,6 +50,7 @@ class PostDetailSerializer(serializers.ModelSerializer):
     category_username = serializers.ReadOnlyField(source='category.name')
     images = PostImageSerializer(many=True)
     rating = serializers.SerializerMethodField()
+    comments = CommentSerializer(many=True)
 
     class Meta:
         model = Post

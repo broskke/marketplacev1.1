@@ -1,5 +1,4 @@
 from django.db import models
-
 from post.models import Post
 from django.conf import settings
 
@@ -12,3 +11,4 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'{self.owner} -> {self.post}'
+

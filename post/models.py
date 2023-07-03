@@ -1,5 +1,4 @@
 from random import randint
-
 from category.models import Category
 from django.db import models
 from django.conf import settings
@@ -14,11 +13,11 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return f'{self.owner} - {self.title}'
-
     class Meta:
-        ordering = ('created_at',)
+        ordering = ('title', 'body', 'category', 'preview', 'comments')
+
+    def __str__(self):
+        return f"{self.title}: {self.preview}"
 
 
 class Favorite(models.Model):

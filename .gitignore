@@ -10,6 +10,7 @@ __pycache__/
 local_settings.py
 db.sqlite3
 media
+media/
 **/migrations/*
 !***/migrations/__init__.py
 .vscode
